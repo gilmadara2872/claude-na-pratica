@@ -200,11 +200,12 @@ da planilha de custos foi generalizado.
 
 ## Verificação e qualidade
 
-- **52 verificações automatizadas** executadas, com 52 aprovações e 0 falhas.
-- Navegação testada nas quatro telas do hub.
 - Revisão de código documentada em `VERIFICACAO-ERROS.md`, com achados de
   segurança (XSS por interpolação não escapada), robustez das rotas de escrita
   e consistência de números.
+- Verificação de publicação: o hub e as quatro telas respondem HTTP 200, a API
+  da Central devolve os dados esperados e uma varredura por nomes reais, CPF,
+  tokens e chaves de API não encontra ocorrências.
 - Os formulários da Central validam a entrada no backend e não gravam dados
   inválidos.
 
