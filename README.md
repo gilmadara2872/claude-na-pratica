@@ -213,16 +213,16 @@ da planilha de custos foi generalizado.
 
 ## Segurança
 
-Este repositório foi preparado para ser público. Antes da publicação foi feita
-uma auditoria de segurança que removeu:
+Este repositório é público e foi auditado antes da publicação. A auditoria não
+encontrou senhas, tokens, chaves de API, variáveis de ambiente ou URLs de
+projetos — não há credencial alguma no código.
 
-- comprovantes de transferência, recibos e documentos de terceiros;
-- contratos e transcrições com nomes de pessoas;
-- dados financeiros de terceiros.
+Os dados de todos os módulos são **fictícios e didáticos** (material do curso).
+Os nomes de pessoas da planilha de RH foram substituídos por nomes fictícios
+gerados e o fornecedor da planilha de custos foi generalizado.
 
-O repositório **não contém** senhas, tokens, chaves de API, variáveis de
-ambiente, URLs de projetos ou qualquer credencial. As credenciais, quando
-necessárias, devem ficar em variáveis de ambiente e nunca no código.
+Credenciais, quando necessárias, devem ficar em variáveis de ambiente e nunca
+no código.
 
 ---
 
