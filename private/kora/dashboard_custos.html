@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%23f59e0b'/%3E%3Ctext x='8' y='12' font-size='9' text-anchor='middle' fill='%23111' font-family='sans-serif' font-weight='bold'%3ECP%3C/text%3E%3C/svg%3E">
+  <title>Dashboard de Custos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 40px auto;
+      line-height: 1.6;
+      color: #333;
+      background: #fafafa;
+      padding: 0 16px;
+    }
+    h1 { text-align: center; color: #2c3e50; margin-bottom: 4px; }
+    .sub { text-align: center; color: #777; font-size: .9rem; margin: 0 0 10px; }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+      margin: 25px 0;
+    }
+    .card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,.08);
+    }
+    .card b { display: block; font-size: 1.6rem; color: #2c3e50; }
+    .card span { color: #777; font-size: .85rem; }
+    .section {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.08);
+    }
+    .section h2 { margin-top: 0; color: #2c3e50; }
+    .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .bar-row .label { flex: 0 0 120px; font-size: .9rem; }
+    .bar-row .track { flex: 1; background: #eee; border-radius: 4px; height: 22px; overflow: hidden; }
+    .bar-row .fill { height: 100%; border-radius: 4px; background: #3498db; }
+    .bar-row .value { flex: 0 0 110px; text-align: right; font-family: monospace; font-size: .9rem; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 10px; border-bottom: 1px solid #eee; text-align: left; font-size: .9rem; }
+    th { background: #2c3e50; color: #fff; }
+    tbody tr:hover { background: #f7f7f7; }
+    tfoot td { font-weight: 700; background: #f0f0f0; }
+    .fonte { color: #888; font-size: .8rem; text-align: center; margin-top: 10px; }
+    /* Botão voltar ao hub (canto superior esquerdo) */
+    .voltar-topo{position:fixed;top:16px;left:16px;z-index:9999;display:inline-flex;align-items:center;gap:8px;background:rgba(17,24,39,.88);color:#fff;border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:10px 16px;font:600 14px/1 system-ui,-apple-system,sans-serif;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.35);transition:background .2s,color .2s,transform .2s}
+    .voltar-topo:hover{background:#f59e0b;color:#111;transform:translateX(-2px)}
+  </style>
+</head>
+<body>
+
+  <a class="voltar-topo" href="/index.html" title="Voltar para o painel Claude na Prática">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <span>Voltar</span>
+  </a>
+
+  <h1>Dashboard de Custos</h1>
+  <p class="sub">Cowork • Obra 2026 • fonte: controle_custos_obra.xlsx</p>
+
+  <div class="cards">
+    <div class="card"><b id="t-total">—</b><span>Total realizado</span></div>
+    <div class="card"><b id="t-lanc">—</b><span>Lançamentos</span></div>
+    <div class="card"><b id="t-cat">—</b><span>Categorias</span></div>
+  </div>
+
+  <div class="section">
+    <h2>Custos por categoria</h2>
+    <div id="barras"></div>
+  </div>
+
+  <div class="section">
+    <h2>Lançamentos</h2>
+    <table>
+      <thead>
+        <tr><th>Data</th><th>Fornecedor</th><th>Categoria</th><th>Valor</th></tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+      <tfoot><tr><td colspan="3">Total</td><td id="t-rodape">—</td></tr></tfoot>
+    </table>
+    <p class="fonte">Categorias e valores exatamente como na planilha de controle.</p>
+  </div>
+
+  <script>
+    // Dados reais — fonte: "controle_custos_obra.xlsx" (aba Lançamentos)
+    const LANCAMENTOS = [
+      { data: '2026-02-27', fornecedor: 'Fornecedor A', categoria: 'Mao de obra', valor: 11600 },
+      { data: '2026-04-30', fornecedor: 'Fornecedor A', categoria: 'Mao de obra', valor: 25200 },
+      { data: '2026-05-29', fornecedor: 'Fornecedor A', categoria: 'Telhado',     valor: 10400 },
+      { data: '2026-07-31', fornecedor: 'Fornecedor A', categoria: 'JunhoJulho',  valor: 19200 },
+      { data: '2026-09-15', fornecedor: 'Fornecedor A', categoria: 'Reembolso',   valor: 480 },
+      { data: '2026-09-30', fornecedor: 'Fornecedor A', categoria: 'AgoSet',      valor: 20800 },
+      { data: '2026-10-30', fornecedor: 'Fornecedor A', categoria: 'Outubro',     valor: 8400 }
+    ];
+
+    const BRL = v => 'R$ ' + v.toLocaleString('pt-BR');
+    const $ = id => document.getElementById(id);
+
+    const total = LANCAMENTOS.reduce((a, b) => a + b.valor, 0);
+
+    // categorias
+    const cat = {};
+    LANCAMENTOS.forEach(l => { cat[l.categoria] = (cat[l.categoria] || 0) + l.valor; });
+    const categorias = Object.keys(cat).sort((a, b) => cat[b] - cat[a]);
+    const max = Math.max(...categorias.map(c => cat[c]));
+    const cores = ['#e74c3c', '#3498db', '#2ecc71', '#9b59b6', '#e67e22', '#16a085'];
+
+    $('t-total').textContent = BRL(total);
+    $('t-lanc').textContent = LANCAMENTOS.length;
+    $('t-cat').textContent = categorias.length;
+
+    $('barras').innerHTML = categorias.map((c, i) =>
+      '<div class="bar-row">' +
+        '<span class="label">' + c + '</span>' +
+        '<div class="track"><div class="fill" style="width:' + (cat[c] / max * 100).toFixed(1) + '%;background:' + cores[i % cores.length] + '"></div></div>' +
+        '<span class="value">' + BRL(cat[c]) + '</span>' +
+      '</div>'
+    ).join('');
+
+    $('tbody').innerHTML = LANCAMENTOS.map(l =>
+      '<tr><td>' + l.data + '</td><td>' + l.fornecedor + '</td><td>' + l.categoria + '</td><td>' + BRL(l.valor) + '</td></tr>'
+    ).join('');
+    $('t-rodape').textContent = BRL(total);
+  </script>
+
+</body>
+</html>

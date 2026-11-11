@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%23f59e0b'/%3E%3Ctext x='8' y='12' font-size='9' text-anchor='middle' fill='%23111' font-family='sans-serif' font-weight='bold'%3ECP%3C/text%3E%3C/svg%3E">
+<title>Claude na Prática — Sistema Completo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,Inter var,system-ui,-apple-system,sans-serif;background:#0f172a;color:#eee;min-height:100vh}
+header{padding:1.2rem 1.5rem;background:#111827;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+header img{width:44px;height:44px;border-radius:12px;background:#f59e0b;color:#111;display:grid;place-items:center;font-weight:800}
+header h1{font-size:1.4rem;margin:0}
+header .sub{color:#94a3b8;font-size:.9rem;margin-top:.3rem}
+main{max-width:1400px;margin:0 auto;width:100%}
+.hub-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;padding:1.5rem;width:100%}
+.card{background:#1e293b;padding:1.4rem;border-radius:16px;border:2px solid #334155;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;text-decoration:none;color:inherit;transition:border-color .2s,transform .2s,box-shadow .2s}
+.card:hover{border-color:#6ee7b7;transform:translateY(-4px);box-shadow:0 8px 24px rgba(110,231,183,.12)}
+.card .icon{width:72px;height:72px;border-radius:18px;background:#334155;display:grid;place-items:center;font-size:2rem;margin-bottom:.6rem}
+.card .title{font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:.3rem}
+.card .desc{color:#94a3b8;font-size:.88rem;line-height:1.5}
+.card .badge{display:inline-block;margin-top:.6rem;padding:.3rem .8rem;border-radius:99px;background:#f59e0b;color:#111;font-size:.78rem;font-weight:700}
+.card .btn{margin-top:1rem;background:#334155;color:#fff;font-weight:700;font-size:.9rem;padding:.65rem 1.3rem;border-radius:10px;transition:background .2s}
+.card:hover .btn{background:#f59e0b;color:#111}
+</style>
+</head>
+<body>
+<header>
+  <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Crect width='44' height='44' rx='12' fill='%23f59e0b'/%3E%3Ctext x='22' y='28' font-family='sans-serif' font-size='20' font-weight='bold' fill='#111'%3ECP%3C/text%3E%3C/svg%3E" alt="CP">
+  <div>
+    <h1>Claude na Prática — Sistema Completo</h1>
+    <div class="sub">Acesse os 4 sistemas por meio dos ícones abaixo. Clique em alguma opção para abrir o sistema em tela cheia.</div>
+  </div>
+</header>
+<main class="hub-grid">
+  <a class="card" href="/private/luma/dashboard_luma.html">
+    <div class="icon">🍧</div>
+    <div class="title">Luma — Dashboard</div>
+    <div class="desc">Faturamento R$ 6,8 mi · 1S 2026 (+12%, tráfego +34%, churn 9%)</div>
+    <div class="badge">Visualização completa</div>
+    <span class="btn">Ver Dashboard</span>
+  </a>
+  <a class="card" href="/private/kora/dashboard_custos.html">
+    <div class="icon">📊</div>
+    <div class="title">Kora Custos</div>
+    <div class="desc">Realizado R$ 96.080 · 7 lançamentos · 6 categorias</div>
+    <div class="badge">Visualização completa</div>
+    <span class="btn">Ver Dashboard</span>
+  </a>
+  <a class="card" href="/private/kora/kora-foods.html">
+    <div class="icon">🌱</div>
+    <div class="title">Kora Foods</div>
+    <div class="desc">Site institucional + pedidos de orçamento</div>
+    <div class="badge">Completo</div>
+    <span class="btn">Ver Site</span>
+  </a>
+  <a class="card" href="/private/central/index.html">
+    <div class="icon">👥</div>
+    <div class="title">Central de Pessoas</div>
+    <div class="desc">Kora Foods · RH em 8 áreas · 80 pessoas</div>
+    <div class="badge">Sistema de Gestão</div>
+    <span class="btn">Ver Sistema</span>
+  </a>
+</main>
+</body>
+</html>

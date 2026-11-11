@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+venv/
+
+# Segredos e ambiente — nunca versionar
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+*.swp
