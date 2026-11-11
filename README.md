@@ -59,6 +59,7 @@ os números-chave de cada um.
 │   │   ├── kora-foods.html           # Site institucional + pedidos de orçamento
 │   │   ├── gen_custos.py             # Gera a planilha de controle de custos
 │   │   ├── controle_custos_obra.xlsx # Fonte de dados (anonimizada)
+│   │   ├── 02 - Projeto Cowork - Custos Obra/   # Recibos e comprovantes de apoio
 │   │   └── 03 - Projeto Claude Code - Kora Foods/
 │   │       ├── empresa-kora.md
 │   │       ├── frontend-design.md
@@ -70,6 +71,7 @@ os números-chave de cada um.
 │       ├── REVIEW.md / REVIEW_app.md
 │       ├── findings-checklist.md
 │       ├── 03 - Arquivo Apoio - Pessoas_RH.xlsx  # Fonte de dados (nomes fictícios)
+│       ├── 04 - Arquivo de Apoio - Financeiro.xlsx
 │       └── 05 - Arquivo Apoio - identidade-visual.md
 ```
 
@@ -208,6 +210,26 @@ da planilha de custos foi generalizado.
   tokens e chaves de API não encontra ocorrências.
 - Os formulários da Central validam a entrada no backend e não gravam dados
   inválidos.
+
+### Status da verificação (11/11/2026)
+
+Verificação executada antes da publicação:
+
+- Hub e as 4 telas respondem HTTP 200; a API `/api/dados` devolve os dados
+  esperados.
+- Central: 81 colaboradores ativos, R$ 26.964,31 em férias vencidas e 9 férias
+  vencendo em 60 dias — conferidos contra a planilha.
+- Kora Custos: total de R$ 96.080 (7 lançamentos, 6 categorias) — conferido
+  contra `controle_custos_obra.xlsx`.
+- Luma: as 34 linhas de dados cruzados (serviço × segmento) e a receita mensal
+  por serviço não apresentam nenhuma divergência em relação à planilha.
+- Sintaxe JavaScript validada (`node --check`) nos 4 painéis; todos os assets
+  referenciados existem e são servidos localmente.
+- `POST` inválido na Central não altera a planilha.
+- Nenhum token, chave de API, senha ou CPF encontrado no repositório.
+
+Pendência conhecida: o número de WhatsApp da Kora Foods permanece como
+placeholder (`5511999999999`) — substituir pelo número real quando disponível.
 
 ---
 
